@@ -1,7 +1,5 @@
 %% BICEPS
 
-% BICEPS installation directions are given in [INSTALL](./INSTALL.md).
-
 %% Overview
 
 %% Example
