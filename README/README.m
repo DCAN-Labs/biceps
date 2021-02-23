@@ -1,4 +1,6 @@
-%% GUI_environments
+%% BICEPS
+
+BICEPS installation directions are given in [INSTALL](./INSTALL.md).
 
 %% Overview
 
@@ -35,7 +37,7 @@ path_BIDS_data='C:\Users\oscar\OneDrive\matlab_code\GUI_environments\data\anonym
 % Outputs:
 %%
 %
-% To add a preffix to the list name, provide the extra argument preffix:
+% To add a prefix to the list name, provide the extra argument preffix:
 preffix='all_dtseries_';
 [T_count, list,text_counts,text_missing] = scout_bids_for_gui_env(path_BIDS_data,...
     'preffix',preffix)
