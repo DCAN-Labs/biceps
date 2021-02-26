@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2587592009" file="/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps.prj" location="/panfs/roc/groups/4/miran045/reine097/projects/biceps" name="biceps" preferred-package-location="/panfs/roc/groups/4/miran045/reine097/projects/biceps/bison/for_redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="1890235936" file="/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps.prj" location="/panfs/roc/groups/4/miran045/reine097/projects/biceps" name="biceps" preferred-package-location="/panfs/roc/groups/4/miran045/reine097/projects/bin/linux/biceps/for_redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>biceps</param.appname>
     <param.icon />
     <param.icons />
@@ -29,16 +29,16 @@ MR/v96/runtime/glnxa64:MR/v96/bin/glnxa64:MR/v96/sys/os/glnxa64:MR/v96/sys/openg
 If it is defined, set it to the following:
 
 ${LD_LIBRARY_PATH}:MR/v96/runtime/glnxa64:MR/v96/bin/glnxa64:MR/v96/sys/os/glnxa64:MR/v96/sys/opengl/lib/glnxa64</param.target.install.notes>
-    <param.intermediate>${PROJECT_ROOT}/biceps/for_testing</param.intermediate>
-    <param.files.only>${PROJECT_ROOT}/biceps/for_redistribution_files_only</param.files.only>
-    <param.output>${PROJECT_ROOT}/biceps/for_redistribution</param.output>
+    <param.intermediate>${PROJECT_ROOT}/bin/linux/for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}/bin/linux/for_redistribution_files_only</param.files.only>
+    <param.output>/panfs/roc/groups/4/miran045/reine097/projects/bin/linux/biceps/for_redistribution</param.output>
     <param.logdir>${PROJECT_ROOT}/biceps</param.logdir>
     <param.enable.clean.build>false</param.enable.clean.build>
     <param.user.defined.mcr.options />
     <param.target.type>subtarget.standalone</param.target.type>
     <param.support.packages />
-    <param.web.mcr>true</param.web.mcr>
-    <param.package.mcr>false</param.package.mcr>
+    <param.web.mcr>false</param.web.mcr>
+    <param.package.mcr>true</param.package.mcr>
     <param.no.mcr>false</param.no.mcr>
     <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
     <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
@@ -67,16 +67,11 @@ ${LD_LIBRARY_PATH}:MR/v96/runtime/glnxa64:MR/v96/bin/glnxa64:MR/v96/sys/os/glnxa
       <param.installpath.combo />
       <param.logo />
       <param.install.notes />
-      <param.intermediate />
-      <param.files.only />
-      <param.output />
       <param.logdir />
       <param.enable.clean.build />
       <param.user.defined.mcr.options />
       <param.target.type />
       <param.support.packages />
-      <param.web.mcr />
-      <param.package.mcr />
       <param.no.mcr />
       <param.web.mcr.name />
       <param.package.mcr.name />
@@ -122,12 +117,13 @@ ${LD_LIBRARY_PATH}:MR/v96/runtime/glnxa64:MR/v96/bin/glnxa64:MR/v96/sys/os/glnxa
       <file>${PROJECT_ROOT}/settings_make_par_env.m</file>
       <file>${PROJECT_ROOT}/text_after_reading_path.m</file>
       <file>${PROJECT_ROOT}/validate_path_wb_command.m</file>
+      <file>/panfs/roc/groups/4/miran045/reine097/projects/connectotyping/remove_autocorrelation.m</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}/biceps/for_testing" name="biceps" optional="false">/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps/for_testing/biceps</file>
-      <file location="${PROJECT_ROOT}/biceps/for_testing" name="run_biceps.sh" optional="false">/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps/for_testing/run_biceps.sh</file>
-      <file location="${PROJECT_ROOT}/biceps/for_testing" name="readme.txt" optional="true">/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps/for_testing/readme.txt</file>
-      <file location="${PROJECT_ROOT}/biceps/for_testing" name="splash.png" optional="false">/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps/for_testing/splash.png</file>
+      <file location="${PROJECT_ROOT}/bin/linux/for_testing" name="biceps" optional="false">/panfs/roc/groups/4/miran045/reine097/projects/biceps/bin/linux/for_testing/biceps</file>
+      <file location="${PROJECT_ROOT}/bin/linux/for_testing" name="readme.txt" optional="true">/panfs/roc/groups/4/miran045/reine097/projects/biceps/bin/linux/for_testing/readme.txt</file>
+      <file location="${PROJECT_ROOT}/bin/linux/for_testing" name="run_biceps.sh" optional="false">/panfs/roc/groups/4/miran045/reine097/projects/biceps/bin/linux/for_testing/run_biceps.sh</file>
+      <file location="${PROJECT_ROOT}/bin/linux/for_testing" name="splash.png" optional="false">/panfs/roc/groups/4/miran045/reine097/projects/biceps/bin/linux/for_testing/splash.png</file>
     </build-deliverables>
     <workflow />
     <matlab>

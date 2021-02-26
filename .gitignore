@@ -1,3 +1,7 @@
 biceps.geany
 bin/PackagingLog.html
 bin/for_testing/
+*.*~
+#*#
+.#*
+\#createInstallationPrograms#
