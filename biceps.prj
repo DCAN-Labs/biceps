@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1890235936" file="/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps.prj" location="/panfs/roc/groups/4/miran045/reine097/projects/biceps" name="biceps" preferred-package-location="/panfs/roc/groups/4/miran045/reine097/projects/bin/linux/biceps/for_redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="2919896339" file="/panfs/roc/groups/4/miran045/reine097/projects/biceps/biceps.prj" location="/panfs/roc/groups/4/miran045/reine097/projects/biceps" name="biceps" preferred-package-location="/panfs/roc/groups/4/miran045/reine097/projects/bin/linux/biceps/for_redistribution" preferred-package-type="package.type.install" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>biceps</param.appname>
     <param.icon />
     <param.icons />
@@ -117,7 +117,6 @@ ${LD_LIBRARY_PATH}:MR/v96/runtime/glnxa64:MR/v96/bin/glnxa64:MR/v96/sys/os/glnxa
       <file>${PROJECT_ROOT}/settings_make_par_env.m</file>
       <file>${PROJECT_ROOT}/text_after_reading_path.m</file>
       <file>${PROJECT_ROOT}/validate_path_wb_command.m</file>
-      <file>/panfs/roc/groups/4/miran045/reine097/projects/connectotyping/remove_autocorrelation.m</file>
     </fileset.depfun>
     <build-deliverables>
       <file location="${PROJECT_ROOT}/bin/linux/for_testing" name="biceps" optional="false">/panfs/roc/groups/4/miran045/reine097/projects/biceps/bin/linux/for_testing/biceps</file>

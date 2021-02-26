@@ -18,7 +18,7 @@ if local_wb_command_exist == 0
     if isfile(wb_command_on_rushmore) == 1
         handles.paths.wb_command= wb_command_on_rushmore;
     else        
-        wb_command_vm='/opt/workbench/';
+        wb_command_vm='/opt/workbench/wb_command';
         
         if isfile(wb_command_vm) == 1
             handles.paths.wb_command= wb_command_vm;
