@@ -29,7 +29,7 @@ if local_wb_command_exist == 0
                 'Please provide path to wb_command');
             handles.paths.wb_command=[path  file];
             local_wb_command_path=handles.paths.wb_command;
-            foo=which('GUI_environments');
+            foo=which('biceps');
             [filepath,~,~] = fileparts(foo);
             local_wb_command_path_file=[filepath filesep 'local_wb_command_path.mat'];
             save(local_wb_command_path_file,'local_wb_command_path')
