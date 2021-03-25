@@ -145,10 +145,18 @@ full_path=handles.participants.full_path;
 fs=filesep;
 motion_masks=cell(n,1);
 for i=1:n
-    motion_masks{i} = strjoin([strtrim(full_path(i,:)) fs 'func' fs ids(i,:) '_' visit_folder(i,:) '_task-rest_motion_mask.mat'],'');
-    if ~isfile(motion_masks{i})
-        motion_masks{i} = strjoin([strtrim(full_path(i,:)) fs 'func' fs ids(i,:) '_' visit_folder(i,:) '_task-rest_bold_mask.mat'],'');
-    end
+    
+    opt=cell(3,1);
+    opt{1} = strjoin([strtrim(full_path(i,:)) fs 'func' fs ids(i,:) '_' visit_folder(i,:) '_task-rest_motion_mask.mat'],'');
+    opt{2} = strjoin([strtrim(full_path(i,:)) fs 'func' fs ids(i,:) '_' visit_folder(i,:) '_task-rest_bold_mask.mat'],'');
+    opt{3} = strjoin([strtrim(full_path(i,:)) fs 'func' fs ids(i,:) '_' visit_folder(i,:) '_task-rest_desc-filteredwithoutliers_motion_mask.mat'],'');
+    
+    local_ix=find(isfile(opt));
+    motion_masks{i}=opt{local_ix(1)};
+    %     motion_masks{i} = strjoin([strtrim(full_path(i,:)) fs 'func' fs ids(i,:) '_' visit_folder(i,:) '_task-rest_motion_mask.mat'],'');
+    %     if ~isfile(motion_masks{i})
+    %         motion_masks{i} = strjoin([strtrim(full_path(i,:)) fs 'func' fs ids(i,:) '_' visit_folder(i,:) '_task-rest_bold_mask.mat'],'');
+    %     end
     
     %summary_dir = [strtrim(full_path(i,:)) fs handles.paths.summary_dir];
     %file_frames = [strtrim(full_path(i,:)) fs handles.paths.frames];
