@@ -59,9 +59,9 @@ for i=1:n_parcel
         end
         change_permissions(handles,parcel_folder)
         if handles.save_raw_timecourses_flag
-        raw_tc=cell(n_surv,1);
+            raw_tc=cell(n_surv,1);
         end
-%         masked_tc=cell(n_surv,1);
+        %         masked_tc=cell(n_surv,1);
         handles.mc.min_frames;
         % read the first participant to preallocate memory for fconn
         j=1;
@@ -69,12 +69,15 @@ for i=1:n_parcel
         path_to_nii=[strtrim(handles.participants.full_path(ix(j),:)) fs 'func'];
         
         %path_to_csv=[strtrim(handles.participants.full_path(ix(j),:)) fs handles.paths.append_path_csv_parcellations];
-        filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+        %         filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
         %filename=[handles.mc.surv_parcels{n_parcel} '.csv'];
         %     temp_raw=ciftiopen([path_to_nii fs filename], '/home/exacloud/lustre1/fnl_lab/code/external/utilities/workbench-1.2.3-HCP/bin_rh_linux64/wb_command');% read raw timecourses
         %     temp_raw=ciftiopen([path_to_nii fs filename], handles.paths.wb_command);% read raw timecourses
         
-        TEMP_RAW = read_cifti_via_csv ([path_to_nii fs filename],quotes_if_space(handles.paths.wb_command));
+        filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+        local_filename=strtrim(ls([path_to_nii fs filename]));
+        
+        TEMP_RAW = read_cifti_via_csv (local_filename,quotes_if_space(handles.paths.wb_command));
         % OUTLIER DETECTION - Anders Perrone 20180516
         %stdev=std(temp_raw,0,2);
         %FDvec_keep_idx=find(mask{j}==1);
@@ -92,9 +95,9 @@ for i=1:n_parcel
         
         temp_raw_masked=TEMP_RAW(:,mask{j,1});% mask raw timecourses
         if handles.save_raw_timecourses_flag
-        raw_tc{j}=TEMP_RAW;
+            raw_tc{j}=TEMP_RAW;
         end
-%         masked_tc{j}=temp_raw_masked;
+        %         masked_tc{j}=temp_raw_masked;
         
         %     n_rois=size(temp_raw.cdata,1);
         n_rois=size(TEMP_RAW,1);
@@ -118,12 +121,14 @@ for i=1:n_parcel
         for j=2:n_surv
             disp(['Processing participant ' num2str(j) ' out of ' num2str(n_surv) ' in parcel ' handles.mc.surv_parcels{i} ' (' num2str(i) ' out of ' num2str(n_parcel) '), standard']);
             path_to_nii=[strtrim(handles.participants.full_path(ix(j),:)) fs 'func'];
-            filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+%             filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+            filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+            local_filename=strtrim(ls([path_to_nii fs filename]));
             %filename=[handles.mc.surv_parcels{n_parcel} '.csv'];
             %         temp_raw=ciftiopen([path_to_nii fs filename], '/home/exacloud/lustre1/fnl_lab/code/external/utilities/workbench-1.2.3-HCP/bin_rh_linux64/wb_command');
             %         temp_raw=ciftiopen([path_to_nii fs filename], handles.paths.wb_command);
             
-            TEMP_RAW=read_cifti_via_csv ([path_to_nii fs filename],quotes_if_space(handles.paths.wb_command));
+            TEMP_RAW=read_cifti_via_csv (local_filename,quotes_if_space(handles.paths.wb_command));
             
             % OUTLIER DETECTION - Anders Perrone 20180516
             %stdev=std(temp_raw,0,2);
@@ -141,9 +146,9 @@ for i=1:n_parcel
             
             temp_raw_masked=TEMP_RAW(:,mask{j,1});
             if handles.save_raw_timecourses_flag
-            raw_tc{j}=TEMP_RAW;
+                raw_tc{j}=TEMP_RAW;
             end
-%             masked_tc{j}=temp_raw_masked;
+            %             masked_tc{j}=temp_raw_masked;
             
             %ix1=randperm(handles.mc.n_surv_frames(ix(j),1),n_frames);
             %ix1=find(mask{j,3}==1);
@@ -158,7 +163,7 @@ for i=1:n_parcel
             %         fconn_temp(:,:,j,3)=corr(temp_raw.cdata(:,mask{j,1}==1).');
             fconn_temp(:,:,j,3)=corr(TEMP_RAW(:,mask{j,1}==1).');
         end
-                
+        
         disp(['Saving data from parcel ' handles.mc.surv_parcels{i} ' (' num2str(i) ' out of ' num2str(n_parcel) ')']);
         
         if handles.save_raw_timecourses_flag

@@ -12,7 +12,14 @@ if exist_variance_file==0
     
     ix=find(isfile(opt));
     
-    alt_dtseries_var_path=opt{ix};
+    if isempty(ix)
+        nested_folder_name=extract_nested_folder_name(filepath);
+        alt_dtseries_var_path=strtrim(ls([handles.alternative_path_variances filesep  '*' nested_folder_name{end-2} '*' nested_folder_name{end-1} '*']));
+    else
+        alt_dtseries_var_path=opt{ix};
+    end
+    
+    
     if isfile(alt_dtseries_var_path)
         dtseries_var_path=alt_dtseries_var_path;
     end

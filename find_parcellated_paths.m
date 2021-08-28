@@ -37,7 +37,7 @@ for k=1:n
     %         nii_files(end)=[];
     %     end
     
-    dummy=dir([path_to_nii  fs '*rest_bold*.ptseries.nii']);
+    dummy=dir([path_to_nii  fs '*rest*bold*.ptseries.nii']);
     
     nn=size(dummy,1);
     nii_files=cell(nn,1);
