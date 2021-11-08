@@ -49,9 +49,9 @@ for i=1:n_parcel
         end
         change_permissions(handles,parcel_folder)
         if handles.save_raw_timecourses_flag
-        raw_tc_no_auto=cell(n_surv,1);
+            raw_tc_no_auto=cell(n_surv,1);
         end
-%         masked_tc=cell(n_surv,1);
+        %         masked_tc=cell(n_surv,1);
         
         % read the first participant to preallocate memory for fconn
         j=1;
@@ -66,8 +66,13 @@ for i=1:n_parcel
         %     temp_raw=temp_raw_cifti.cdata.';
         %     temp_raw_no_auto=temp_raw;
         
-        filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
-        local_filename=strtrim(ls([path_to_nii fs filename]));
+        try
+            filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+            local_filename=strtrim(ls([path_to_nii fs filename]));
+        catch
+            filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold*-' handles.mc.surv_parcels{i} '.nii'],'');
+            local_filename=strtrim(ls([path_to_nii fs filename]));
+        end
         TEMP_RAW = read_cifti_via_csv (local_filename,quotes_if_space(handles.paths.wb_command));
         TEMP_RAW=TEMP_RAW';
         temp_raw_no_auto=TEMP_RAW;
@@ -91,9 +96,9 @@ for i=1:n_parcel
         
         temp_raw_masked=temp_raw_no_auto(mask{j},:);% mask raw timecourses
         if handles.save_raw_timecourses_flag
-        raw_tc_no_auto{j}=temp_raw_no_auto;
+            raw_tc_no_auto{j}=temp_raw_no_auto;
         end
-%         masked_tc{j}=temp_raw_masked;
+        %         masked_tc{j}=temp_raw_masked;
         
         %     n_rois=size(temp_raw,2);
         n_rois=size(TEMP_RAW,2);
@@ -110,13 +115,18 @@ for i=1:n_parcel
         for j=2:n_surv
             disp(['Processing participant ' num2str(j) ' out of ' num2str(n_surv) ' in parcel ' handles.mc.surv_parcels{i} ' (' num2str(i) ' out of ' num2str(n_parcel) '), no autocorrelation']);
             path_to_nii=[strtrim(handles.participants.full_path(ix(j),:)) fs 'func'];
-%             filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+            %             filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
             %         temp_raw_cifti=ciftiopen([path_to_nii fs filename], '/home/exacloud/lustre1/fnl_lab/code/external/utilities/workbench-1.2.3-HCP/bin_rh_linux64/wb_command');
             %         temp_raw_cifti=ciftiopen([path_to_nii fs filename], handles.paths.wb_command);
             %         temp_raw=temp_raw_cifti.cdata.';
             %         temp_raw_no_auto=temp_raw;
-            filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
-            local_filename=strtrim(ls([path_to_nii fs filename]));
+            try
+                filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+                local_filename=strtrim(ls([path_to_nii fs filename]));
+            catch
+                filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold*-' handles.mc.surv_parcels{i} '.nii'],'');
+                local_filename=strtrim(ls([path_to_nii fs filename]));
+            end
             
             TEMP_RAW = read_cifti_via_csv (local_filename,quotes_if_space(handles.paths.wb_command));
             TEMP_RAW=TEMP_RAW';
@@ -142,9 +152,9 @@ for i=1:n_parcel
             
             temp_raw_masked=temp_raw_no_auto(mask{j},:);% mask raw timecourses
             if handles.save_raw_timecourses_flag
-            raw_tc_no_auto{j}=temp_raw_no_auto;
+                raw_tc_no_auto{j}=temp_raw_no_auto;
             end
-%             masked_tc{j}=temp_raw_masked;
+            %             masked_tc{j}=temp_raw_masked;
             
             ix1=randperm(handles.mc.n_surv_frames(ix(j),1),n_frames);
             fconn_temp(:,:,j,1)=corr(temp_raw_masked(ix1,:));

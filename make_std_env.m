@@ -74,8 +74,13 @@ for i=1:n_parcel
         %     temp_raw=ciftiopen([path_to_nii fs filename], '/home/exacloud/lustre1/fnl_lab/code/external/utilities/workbench-1.2.3-HCP/bin_rh_linux64/wb_command');% read raw timecourses
         %     temp_raw=ciftiopen([path_to_nii fs filename], handles.paths.wb_command);% read raw timecourses
         
-        filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
-        local_filename=strtrim(ls([path_to_nii fs filename]));
+        try
+            filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+            local_filename=strtrim(ls([path_to_nii fs filename]));
+        catch
+            filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold*-' handles.mc.surv_parcels{i} '.nii'],'');
+            local_filename=strtrim(ls([path_to_nii fs filename]));
+        end
         
         TEMP_RAW = read_cifti_via_csv (local_filename,quotes_if_space(handles.paths.wb_command));
         % OUTLIER DETECTION - Anders Perrone 20180516
@@ -121,9 +126,15 @@ for i=1:n_parcel
         for j=2:n_surv
             disp(['Processing participant ' num2str(j) ' out of ' num2str(n_surv) ' in parcel ' handles.mc.surv_parcels{i} ' (' num2str(i) ' out of ' num2str(n_parcel) '), standard']);
             path_to_nii=[strtrim(handles.participants.full_path(ix(j),:)) fs 'func'];
-%             filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+            %             filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '_task-rest_bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
             filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
-            local_filename=strtrim(ls([path_to_nii fs filename]));
+            try
+                filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold_atlas-' handles.mc.surv_parcels{i} '.nii'],'');
+                local_filename=strtrim(ls([path_to_nii fs filename]));
+            catch
+                filename=strjoin([handles.participants.ids(ix(j),:) '_' handles.participants.visit_folder(ix(j),:) '*-rest*bold*-' handles.mc.surv_parcels{i} '.nii'],'');
+                local_filename=strtrim(ls([path_to_nii fs filename]));
+            end
             %filename=[handles.mc.surv_parcels{n_parcel} '.csv'];
             %         temp_raw=ciftiopen([path_to_nii fs filename], '/home/exacloud/lustre1/fnl_lab/code/external/utilities/workbench-1.2.3-HCP/bin_rh_linux64/wb_command');
             %         temp_raw=ciftiopen([path_to_nii fs filename], handles.paths.wb_command);
